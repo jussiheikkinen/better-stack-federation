@@ -26,8 +26,9 @@
       "@/hooks/*": ["./src/hooks/*"],
       "@/components/*": ["./src/components/*"],
       "@/pages/*": ["./src/pages/*"],
-      "@/routes/*": ["./src/routes/*"]
+      "@/routes/*": ["./src/routes/*"],
+      "*": ["./@mf-types/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "./@mf-types/*"]
 }

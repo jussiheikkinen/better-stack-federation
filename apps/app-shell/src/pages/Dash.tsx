@@ -1,5 +1,6 @@
 import '@/App.css';
 import AuthButton from '@/components/AuthButton';
+import RemoteApp1Component from '@/components/RemoteApp1';
 
 const Dash = () => {
   return (
@@ -9,7 +10,7 @@ const Dash = () => {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Rsbuild with React</h1>
           <p className="text-gray-600">Start building amazing things with Rsbuild.</p>
         </div>
-
+        <RemoteApp1Component />
         <div className="space-y-4">
           <AuthButton variant="login" className="w-full">
             Login with GitHub

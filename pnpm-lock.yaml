@@ -57,9 +57,18 @@ importers:
       '@hono/node-server':
         specifier: ^1.19.9
         version: 1.19.9(hono@4.12.1)
+      '@module-federation/bridge-react':
+        specifier: ^2.0.1
+        version: 2.0.1(react-dom@19.2.4(react@19.2.4))(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
+      '@module-federation/enhanced':
+        specifier: ^0.20.0
+        version: 0.20.0(@rspack/core@1.7.6(@swc/helpers@0.5.18))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(webpack@5.105.2)
       '@module-federation/rsbuild-plugin':
         specifier: ^0.20.0
         version: 0.20.0(@rsbuild/core@1.7.3)(@rspack/core@1.7.6(@swc/helpers@0.5.18))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(webpack@5.105.2)
+      '@module-federation/runtime':
+        specifier: ^2.0.1
+        version: 2.0.1
       better-auth:
         specifier: ^1.4.18
         version: 1.4.18(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -609,6 +618,22 @@ packages:
   '@module-federation/bridge-react-webpack-plugin@0.20.0':
     resolution: {integrity: sha512-9646830ZQqslgpdoil/1AYHuRH9I1fkpBeMWtiqzkTZl5+tSxJtghlzaNVRwC2QZiuH4lXgo/SNGpomGyPC+jA==}
 
+  '@module-federation/bridge-react@2.0.1':
+    resolution: {integrity: sha512-pioaxszMgfPL6T7uJk0+Wm6QqanhRwIcKOjbDMTDbKX1hGO5Y00Y1RGLq5xxilytDT9/Ivu+Yuyo8zmsGp9AAw==}
+    peerDependencies:
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+      react-router: ^6 || ^7
+      react-router-dom: ^4 || ^5 || ^6 || ^7
+    peerDependenciesMeta:
+      react-router:
+        optional: true
+      react-router-dom:
+        optional: true
+
+  '@module-federation/bridge-shared@2.0.1':
+    resolution: {integrity: sha512-GAjbEJC90GheChLzM8JcSYOEHu4GFqSz+X27dBnQ2Ka1R3zqi3OfWowbyQVnH6LLKyM6A+FC41KMBDCkfv/E+w==}
+
   '@module-federation/cli@0.20.0':
     resolution: {integrity: sha512-/uNb1SUX50YMzrcXTbvt+wji/wTRTIZDnwrMTl6kG1R/9PfPN65ROzbrCh6jwjGdOHehU21MjwKqHYC+7TVlUQ==}
     engines: {node: '>=16.0.0'}
@@ -649,6 +674,9 @@ packages:
 
   '@module-federation/error-codes@0.22.0':
     resolution: {integrity: sha512-xF9SjnEy7vTdx+xekjPCV5cIHOGCkdn3pIxo9vU7gEZMIw0SvAEdsy6Uh17xaCpm8V0FWvR0SZoK9Ik6jGOaug==}
+
+  '@module-federation/error-codes@2.0.1':
+    resolution: {integrity: sha512-2bJF/ft+qL9L6Zvq2t/G9/f/0wFL73cM8/NJ04uyYz9BjIgvx28K5qu8/6+IwgEEKATG7vOhBBVj6wH3S+5ASA==}
 
   '@module-federation/inject-external-runtime-core-plugin@0.20.0':
     resolution: {integrity: sha512-9hHCDtG/r7eucUq0OyIwi9BWQtccvb5ALEWvzbsckxLqTHNr4SQI1rNtBaHOgxhUYEBPlPI41BdhsuKhC9yIvQ==}
@@ -703,6 +731,9 @@ packages:
   '@module-federation/runtime-core@0.22.0':
     resolution: {integrity: sha512-GR1TcD6/s7zqItfhC87zAp30PqzvceoeDGYTgF3Vx2TXvsfDrhP6Qw9T4vudDQL3uJRne6t7CzdT29YyVxlgIA==}
 
+  '@module-federation/runtime-core@2.0.1':
+    resolution: {integrity: sha512-gOuCPSHoQGUGwlxfSTMInFX+QvLxdEWegGGMiLdU5vqbXuva4E9M+kXBBO7/0MkcBPMmVs0wOJGm0XOLeV2f1Q==}
+
   '@module-federation/runtime-tools@0.20.0':
     resolution: {integrity: sha512-5NimrYQyYr8hBl48YVU+w6bzl9uWDKNq3IEqYDgYljTYlupbVqsH2MJTf2A+c95nuCycjHS0vp5B3rnJ3Kdotg==}
 
@@ -715,11 +746,17 @@ packages:
   '@module-federation/runtime@0.22.0':
     resolution: {integrity: sha512-38g5iPju2tPC3KHMPxRKmy4k4onNp6ypFPS1eKGsNLUkXgHsPMBFqAjDw96iEcjri91BrahG4XcdyKi97xZzlA==}
 
+  '@module-federation/runtime@2.0.1':
+    resolution: {integrity: sha512-UQ72P5Oo40dS6vdhHetwTtIsbGciEr+bjoYvDgh1WLPfFlTYd8zo9cLfqaf3juuPfV3cMVARAVPmh16lQYpUGA==}
+
   '@module-federation/sdk@0.20.0':
     resolution: {integrity: sha512-bBFGA07PpfioJLY0DITVe+szGwLtFad+8R4rb5bPFKCZPZsKqLKwMB9tSsdHeieFPSc+1v20s6wq+R1DiWe56Q==}
 
   '@module-federation/sdk@0.22.0':
     resolution: {integrity: sha512-x4aFNBKn2KVQRuNVC5A7SnrSCSqyfIWmm1DvubjbO9iKFe7ith5niw8dqSFBekYBg2Fwy+eMg4sEFNVvCAdo6g==}
+
+  '@module-federation/sdk@2.0.1':
+    resolution: {integrity: sha512-32PwudojGjog51cwpTali7D6ud82oVgsyvOx9JjAzhvXBX96YI4mRsursuWcthDxmigJP9ZvUTXDuRUEDh1OQA==}
 
   '@module-federation/third-party-dts-extractor@0.20.0':
     resolution: {integrity: sha512-8XqjnxrFVPxKpTxRYV8kzkBoltxwakuh3eemB0DO0IjE4K/D0OMKUB68zCWnXAeR53j719YegijwF5GmFGx8qA==}
@@ -1832,6 +1869,9 @@ packages:
   long-timeout@0.1.1:
     resolution: {integrity: sha512-BFRuQUqc7x2NWxfJBCyUrN8iYUYznzL9JROmRz1gZ6KlOIgmoD+njPVbb+VNn2nGMKggMsK79iUNErillsrx7w==}
 
+  lru-cache@10.4.3:
+    resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
+
   luxon@3.7.2:
     resolution: {integrity: sha512-vtEhXh/gNjI9Yg1u4jX/0YVPMvxzHuGgCm6tC5kZyb08yjGWGnqAjGJvcXbqQR2P3MyMEFnRbpcdFS6PBcLqew==}
     engines: {node: '>=12'}
@@ -1957,6 +1997,11 @@ packages:
     resolution: {integrity: sha512-AXJdLo8kgMbimY95O2aKQqsz2iWi9jMgKJhRBAxECE4IFxfcazB2LmzloIoibJI3C12IlY20+KFaLv+71bUJeQ==}
     peerDependencies:
       react: ^19.2.4
+
+  react-error-boundary@4.1.2:
+    resolution: {integrity: sha512-GQDxZ5Jd+Aq/qUxbCm1UtzmL/s++V7zKgE8yMktJiCQXCCFZnMZh9ng+6/Ne6PjNSXH0L9CjeOEREfRnq6Duag==}
+    peerDependencies:
+      react: '>=16.13.1'
 
   react-error-boundary@6.1.1:
     resolution: {integrity: sha512-BrYwPOdXi5mqkk5lw+Uvt0ThHx32rCt3BkukS4X23A2AIWDPSGX6iaWTc0y9TU/mHDA/6qOSGel+B2ERkOvD1w==}
@@ -2587,6 +2632,19 @@ snapshots:
       '@types/semver': 7.5.8
       semver: 7.6.3
 
+  '@module-federation/bridge-react@2.0.1(react-dom@19.2.4(react@19.2.4))(react-router@7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      '@module-federation/bridge-shared': 2.0.1
+      '@module-federation/sdk': 2.0.1
+      lru-cache: 10.4.3
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+      react-error-boundary: 4.1.2(react@19.2.4)
+    optionalDependencies:
+      react-router: 7.13.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+
+  '@module-federation/bridge-shared@2.0.1': {}
+
   '@module-federation/cli@0.20.0(typescript@5.9.3)':
     dependencies:
       '@modern-js/node-bundle-require': 2.68.2
@@ -2666,6 +2724,8 @@ snapshots:
   '@module-federation/error-codes@0.20.0': {}
 
   '@module-federation/error-codes@0.22.0': {}
+
+  '@module-federation/error-codes@2.0.1': {}
 
   '@module-federation/inject-external-runtime-core-plugin@0.20.0(@module-federation/runtime-tools@0.20.0)':
     dependencies:
@@ -2763,6 +2823,11 @@ snapshots:
       '@module-federation/error-codes': 0.22.0
       '@module-federation/sdk': 0.22.0
 
+  '@module-federation/runtime-core@2.0.1':
+    dependencies:
+      '@module-federation/error-codes': 2.0.1
+      '@module-federation/sdk': 2.0.1
+
   '@module-federation/runtime-tools@0.20.0':
     dependencies:
       '@module-federation/runtime': 0.20.0
@@ -2785,9 +2850,17 @@ snapshots:
       '@module-federation/runtime-core': 0.22.0
       '@module-federation/sdk': 0.22.0
 
+  '@module-federation/runtime@2.0.1':
+    dependencies:
+      '@module-federation/error-codes': 2.0.1
+      '@module-federation/runtime-core': 2.0.1
+      '@module-federation/sdk': 2.0.1
+
   '@module-federation/sdk@0.20.0': {}
 
   '@module-federation/sdk@0.22.0': {}
+
+  '@module-federation/sdk@2.0.1': {}
 
   '@module-federation/third-party-dts-extractor@0.20.0':
     dependencies:
@@ -3845,6 +3918,8 @@ snapshots:
 
   long-timeout@0.1.1: {}
 
+  lru-cache@10.4.3: {}
+
   luxon@3.7.2: {}
 
   lz-string@1.5.0: {}
@@ -3940,6 +4015,11 @@ snapshots:
     dependencies:
       react: 19.2.4
       scheduler: 0.27.0
+
+  react-error-boundary@4.1.2(react@19.2.4):
+    dependencies:
+      '@babel/runtime': 7.28.6
+      react: 19.2.4
 
   react-error-boundary@6.1.1(react@19.2.4):
     dependencies:

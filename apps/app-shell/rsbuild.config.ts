@@ -1,11 +1,13 @@
 import { defineConfig, loadEnv } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
+import mfConfig from './module-federation.config';
 
 const { publicVars } = loadEnv();
 
 export default defineConfig({
   logLevel: process.env.NODE_ENV === 'production' ? 'warn' : 'info',
   plugins: [pluginReact()],
+  dev: { hmr: false },
   source: {
     define: publicVars,
   },
@@ -14,6 +16,7 @@ export default defineConfig({
   },
   environments: {
     web: {
+      plugins: [mfConfig],
       source: {
         entry: {
           index: './src/index.client',
@@ -53,6 +56,10 @@ export default defineConfig({
   },
   tools: {
     htmlPlugin: false,
+    rspack: (config) => {
+      // This is the direct fix for the "webpackHotUpdate" collision
+      config.output!.uniqueName = 'better_stack_shell';
+    },
   },
   html: {
     template: './template.html',

@@ -1,7 +1,7 @@
 import { pluginModuleFederation } from '@module-federation/rsbuild-plugin';
 
 export default pluginModuleFederation({
-  name: 'app_bar',
+  name: 'app_1',
   exposes: {
     './App': './src/App.tsx',
   },

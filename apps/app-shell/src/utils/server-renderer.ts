@@ -1,16 +1,24 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { Writable } from 'node:stream';
 import type { RsbuildDevServer } from '@rsbuild/core';
 import type { Context } from 'hono';
+import { stream } from 'hono/streaming';
+import type { PipeableStream } from 'react-dom/server';
 
 interface ServerBundle {
-  render: (pathname: string) => string;
+  // Updated: render now returns the pipeable stream object
+  render: (pathname: string) => Promise<PipeableStream>;
 }
 
 interface Manifest {
   entries: {
     index: {
       initial: {
+        js?: string[];
+        css?: string[];
+      };
+      async?: {
         js?: string[];
         css?: string[];
       };
@@ -32,31 +40,65 @@ export const createServerRenderer = (
   getManifest: () => string | null = () => null,
 ) => {
   return async (c: Context) => {
+    // 1. Force the header immediately at the start of the request
+    c.header('Content-Type', 'text/html; charset=utf-8');
+
     const bundle = await loadBundle();
     const pathname = c.req.path;
-    const markup = bundle.render(pathname);
+    const streamInstance = await bundle.render(pathname);
 
-    let html = templateHtml.replace('<!--app-content-->', markup);
-
+    let headContent = '';
     const manifestData = getManifest();
     if (manifestData) {
       try {
         const { entries } = JSON.parse(manifestData) as Manifest;
         const { js = [], css = [] } = entries.index.initial;
-
-        const scriptTags = js.map((file: string) => `<script src="${file}" defer></script>`).join('\n');
-        const styleTags = css.map((file: string) => `<link rel="stylesheet" href="${file}">`).join('\n');
-
-        html = html.replace('<!--app-head-->', `${scriptTags}\n${styleTags}`);
-      } catch (_err) {
-        console.warn('Failed to parse manifest, using fallback');
-        html = html.replace('<!--app-head-->', '');
+        const { js: asyncJs = [], css: asyncCss = [] } = entries.index.async || {};
+        
+        // Include both initial and async CSS files
+        const allCss = [...css, ...asyncCss];
+        const allJs = [...js, ...asyncJs];
+        
+        const scriptTags = allJs.map((file) => `<script src="${file}" defer></script>`).join('\n');
+        const styleTags = allCss.map((file) => `<link rel="stylesheet" href="${file}">`).join('\n');
+        headContent = `${styleTags}\n${scriptTags}`;
+      } catch {
+        /* manifest error fallback */
       }
-    } else {
-      html = html.replace('<!--app-head-->', '');
     }
 
-    return c.html(html);
+    // 2. Ensure these markers match exactly what is in your index.html
+    const htmlWithHead = templateHtml.replace('<!--app-head-->', headContent);
+    const [templateStart, templateEnd] = htmlWithHead.split('<!--app-content-->');
+
+    return stream(c, async (honoStream) => {
+      // 3. Write the opening HTML
+      await honoStream.write(templateStart);
+
+      await new Promise((resolve, reject) => {
+        const writableBridge = new Writable({
+          write(chunk, _encoding, callback) {
+            honoStream
+              .write(chunk)
+              .then(() => callback())
+              .catch(callback);
+          },
+          final(callback) {
+            // 4. Write the closing HTML when React finishes
+            honoStream
+              .write(templateEnd)
+              .then(() => callback())
+              .catch(callback);
+          },
+        });
+
+        writableBridge.on('finish', resolve);
+        writableBridge.on('error', reject);
+
+        // Start the engine
+        streamInstance.pipe(writableBridge);
+      });
+    });
   };
 };
 
@@ -76,6 +118,7 @@ export const createDevRenderer = (serverAPI: RsbuildDevServer, templateHtml: str
     },
     () => {
       try {
+        // In development, try to read from the expected dist location
         return fs.readFileSync('./dist/manifest.json', 'utf-8');
       } catch {
         return null;

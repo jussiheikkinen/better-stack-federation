@@ -6,7 +6,9 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo run dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preview": "turbo preview",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "kill": "pkill -f \"turbo run dev\""
   },
   "keywords": [],
   "author": "",
