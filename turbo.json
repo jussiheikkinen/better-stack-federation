@@ -12,7 +12,8 @@
       "cache": false
     },
     "preview": {
-      "dependsOn": ["^preview"]
+      "dependsOn": ["^preview"],
+      "persistent": true
     }
   }
 }
